@@ -45,6 +45,8 @@ while loop:
     show("IAQ Percent: {} %".format(iaqPercent) , 4)
     show("eCO2 Value: {}".format(eCO2Value) + " ppm", 5)
 
+    # showing the readings we've taken on the OLED screen on the Kitronik
+
     while time.ticks_diff(time.ticks_ms(), timeBefore) < 5000:
 
         if button_a.is_pressed() or (numOfReadings > 50):
