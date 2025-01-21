@@ -22,3 +22,9 @@ with open('temp.csv', 'r') as my_file:
 
     # print(stripped_data)
 
+temps = []
+humidities = []
+pressures = []
+iaqscores = []
+iaqpercents = []
+eco2 = []
