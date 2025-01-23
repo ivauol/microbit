@@ -12,6 +12,8 @@ iaqscores = []
 iaqpercents = []
 eco2 = []
 
+collections = [temps, humidities, pressures, iaqscores, iaqpercents, eco2]
+
 with open('sample.csv', 'r') as my_file:
     f_data = my_file.readlines()
 
@@ -37,5 +39,3 @@ print(pressures)
 print(iaqscores)
 print(iaqpercents)
 print(eco2)
-
-
