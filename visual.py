@@ -12,12 +12,15 @@ leeds_iaqscores = []
 leeds_iaqpercents = []
 leeds_eco2 = []
 
+# leeds_locations = []
+
 tod_temps = []
 tod_humidities = []
 tod_pressures = []
 tod_iaqscores = []
 tod_iaqpercents = []
 tod_eco2 = []
+tod_locations = []
 
 with open('DataStorageFileLeeds.csv', 'r') as my_file:
     f_data = my_file.readlines()
@@ -36,6 +39,7 @@ with open('DataStorageFileLeeds.csv', 'r') as my_file:
         leeds_iaqpercents.append(float(i[4]))
         leeds_eco2.append(float(i[5]))
 
+
 with open('DataStorageFileTod.csv', 'r') as my_file:
     f_data = my_file.readlines()
 
@@ -52,6 +56,11 @@ with open('DataStorageFileTod.csv', 'r') as my_file:
         tod_iaqscores.append(float(i[3]))
         tod_iaqpercents.append(float(i[4]))
         tod_eco2.append(float(i[5]))
+    
+    for x in range(0, len(stripped_data), 3):
+        tod_locations.append(stripped_data[x])
+
+print(tod_locations)
 
 def find_avgs(my_list):
     averages = []
@@ -62,8 +71,6 @@ def find_avgs(my_list):
 
 tod_temp_avgs = find_avgs(tod_temps)
 leeds_temp_avgs = find_avgs(leeds_temps)
-
-print(leeds_temp_avgs)
 
 tod_humidity_avgs = find_avgs(tod_humidities)
 leeds_humidity_avgs = find_avgs(leeds_humidities)
@@ -80,14 +87,7 @@ leeds_iaqpercent_avgs = find_avgs(leeds_iaqpercents)
 tod_eco2_avgs = find_avgs(tod_eco2)
 leeds_eco2_avgs = find_avgs(leeds_eco2)
 
-
 leeds_locations = ['Bragg Building', 'Student Union', 'Morrisons']
-
-l_temp_in = [leeds_temp_avgs[0], leeds_temp_avgs[2], leeds_temp_avgs[4]]
-l_temp_out = [leeds_temp_avgs[1], leeds_temp_avgs[3], leeds_temp_avgs[5]]
-
-l_pres_in = [leeds_pressure_avgs[0], leeds_pressure_avgs[2], leeds_pressure_avgs[4]]
-l_pres_out = [leeds_pressure_avgs[1], leeds_pressure_avgs[3], leeds_pressure_avgs[5]]
 
 x_axis = np.arange(len(leeds_locations)) 
 # numpy arange function makes x axis values depending on num vals on x axis
@@ -95,7 +95,6 @@ x_axis = np.arange(len(leeds_locations))
 def leeds_graph_gen(leeds_data, ylabel_name, title):
     x_axis = np.arange(len(leeds_locations))
     inside_data = leeds_data[::2]
-    print(inside_data)
     outside_data = leeds_data[1::2]
 
     plt.bar(x_axis-0.2, inside_data, 0.4, label='Inside')
@@ -103,32 +102,38 @@ def leeds_graph_gen(leeds_data, ylabel_name, title):
 
     plt.xticks(x_axis, leeds_locations)
     plt.xlabel('Locations', weight='bold')
-    plt.ylabel(f'{ylabel_name}', weight='bold')
-    plt.title(f'{title}', weight='bold')
+    plt.ylabel(ylabel_name, weight='bold')
+    plt.title(title, weight='bold')
 
     plt.legend()
     plt.show()
 
 
-leeds_graph_gen(leeds_temp_avgs, 'Temperature (Celsius)', 'Temperatures Around Leeds')
+eco2_comparison_locations = ['Bragg Building (L)', 'Student Union (L)', 'Morrisons (L)', 'Tod Park Outside (T)', 'Alfie\'s House (T)', 'Outside THS New Block (T)']
+eco2_comparison_data = [513, 327, 341, 281, 403, 317]
 
-# plt.bar(x_axis-0.2, l_temp_in, 0.4, label='Inside')
-# plt.bar(x_axis+0.2, l_temp_out, 0.4, label='Outside')
+def eco2_graph_gen(data):
 
-'''
-plt.xticks(x_axis, leeds_locations)
-plt.xlabel('Locations')
-plt.ylabel('Temperature (Celsius)')
-plt.title('Temperatures Around Leeds')
-plt.legend()
-plt.show()
-'''
+    x_axis = np.arange(len(eco2_comparison_locations))
 
+    plt.bar(x_axis, data, 0.4)
 
+    # plt.xticks(x_axis, eco2_comparison_locations)
+    plt.xlabel('Locations')
+    plt.ylabel('eCO2 Values (ppm)', weight='bold')
+    plt.title('eCO2, Tod vs Leeds', weight='bold')
 
+    plt.legend()
+    plt.show()
 
+eco2_graph_gen(eco2_comparison_data)
 
+# leeds_graph_gen(leeds_temp_avgs, 'Temperature (Celsius)', 'Temperatures Around Leeds')
+# leeds_graph_gen(leeds_pressure_avgs, 'Pressure (Pa)', 'Pressure Around Leeds')
+# leeds_graph_gen(leeds_humidity_avgs, 'Humidity (%)', 'Humidity Around Leeds')
+# leeds_graph_gen(leeds_iaqscore_avgs, 'IAQ Score', 'IAQ Scores Around Leeds') # note iaqscore this ranges from 0-351
 
+# leeds_graph_gen(leeds_eco2_avgs, 'eCO2 Value', 'eCO2 Values Around Leeds')
 
 
 
