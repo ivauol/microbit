@@ -116,11 +116,11 @@ def eco2_graph_gen(data):
 
     x_axis = np.arange(len(eco2_comparison_locations))
 
-    plt.bar(x_axis, data, 0.4)
+    plt.barh(x_axis, data, 0.4)
 
-    # plt.xticks(x_axis, eco2_comparison_locations)
-    plt.xlabel('Locations')
-    plt.ylabel('eCO2 Values (ppm)', weight='bold')
+    plt.yticks(x_axis, eco2_comparison_locations)
+    plt.ylabel('Locations')
+    plt.xlabel('eCO2 Values (ppm)', weight='bold')
     plt.title('eCO2, Tod vs Leeds', weight='bold')
 
     plt.legend()
