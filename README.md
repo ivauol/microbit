@@ -1,8 +1,8 @@
 # microbit
 
-Documentation: https://microbit-micropython.readthedocs.io/en/v2-docs/ 
-\nEditor (to flash?): https://python.microbit.org/v/3
+This is the repo for my part in this year's group project: to come up with a use for the BBC Microbit and Kitronik equipment.
 
-Mu, the editor we were told to use doesn't work sometimes so I'm storing code here it can get copied when necessary
+[Documentation here](https://microbit-micropython.readthedocs.io/en/v2-docs/)   
+[Editor](https://python.microbit.org/v/3)
 
-Currently my task is to work on file handling and be able to visualise the data we collect
+My task was to work with file handling and to process and display the environmental data we received from places in Leeds and Todmorden.
